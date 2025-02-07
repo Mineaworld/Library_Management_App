@@ -13,8 +13,10 @@ const page = () => {
         email: "",
         password: "",
         confirmPassword: "",
-        uId: 0,
+        studentId: 0,
+        universityCard: "",
       }}
+      // onSubmit={SignUp}
     />
   );
 };
