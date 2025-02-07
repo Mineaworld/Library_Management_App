@@ -51,7 +51,7 @@ export const FIELD_NAMES = {
 export const FIELD_TYPES = {
   fullname: "text",
   email: "email",
-  universityId: "number",
+  studentId: "number",
   password: "password",
 };
 
