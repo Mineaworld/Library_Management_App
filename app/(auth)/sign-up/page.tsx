@@ -12,7 +12,6 @@ const page = () => {
         fullName: "",
         email: "",
         password: "",
-        confirmPassword: "",
         studentId: 0,
         universityCard: "",
       }}

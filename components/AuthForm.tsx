@@ -58,7 +58,7 @@ const AuthForm = <T extends FieldValues>({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
-          className="space-y-6 w-full"
+          className="space-y-6 w-full "
         >
           {Object.keys(defaultValues).map((field) => (
             <FormField
