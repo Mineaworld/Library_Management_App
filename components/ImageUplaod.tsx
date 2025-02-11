@@ -3,6 +3,8 @@
 import config from "@/lib/config";
 import { IKImage, ImageKitProvider, IKUpload } from "imagekitio-next";
 import { useRef, useState } from "react";
+import { Button } from "./ui/button";
+import { toast } from "@/hooks/use-toast";
 
 const {
   env: {
@@ -29,11 +31,33 @@ const authenticator = async () => {
     throw new Error(`Authecatication is failed : $error.message`);
   }
 };
-const ImageUplaod = () => {
+const ImageUplaod = ({
+  onFileChange,
+}: {
+  onFileChange: (filePath: string) => void;
+}) => {
   const IKuplaodRef = useRef(null);
   const [file, setfile] = useState<{ filePath: string | null }>({
     filePath: null,
   });
+
+  const onError = (error: any) => {
+    console.log("error");
+
+    toast({
+      title: "Uploaded failed !",
+      description: `Your image failed to upload. Please try again`,
+      variant: "destructive",
+    });
+  };
+  const onSuccess = (res: any) => {
+    setfile(res);
+
+    toast({
+      title: "Uploaded successfully !",
+      description: `${res.filePath} uploaded successfully`,
+    });
+  };
 
   return (
     <ImageKitProvider
@@ -41,7 +65,41 @@ const ImageUplaod = () => {
       urlEndpoint={urlEndpoint}
       authenticator={authenticator}
     >
-      <IKUpload className="hidden" ref={IKuplaodRef} />
+      <IKUpload
+        className="hidden"
+        ref={IKuplaodRef}
+        onError={onError}
+        onSuccess={onSuccess}
+        fileName="test.png"
+      />
+      <Button
+        className="upload-btn"
+        onClick={(e) => {
+          e.preventDefault();
+          if (IKuplaodRef.current) {
+            // @ts-ignore
+            IKuplaodRef.current?.click();
+          }
+        }}
+      >
+        <img
+          src="/icons/upload.svg"
+          alt="upload-image"
+          width={20}
+          height={20}
+          className="object-contain"
+        />
+        <p className="text-light-100 text-base">Upload a File</p>
+        {file && <p className="upload-filename">{file.filePath}</p>}
+      </Button>
+      {file.filePath && (
+        <IKImage
+          alt={file.filePath}
+          path={file.filePath}
+          width={500}
+          height={500}
+        />
+      )}
     </ImageKitProvider>
   );
 };

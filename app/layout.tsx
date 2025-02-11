@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ReactNode } from "react";
+import { Toaster } from "@/components/ui/toaster";
 
 const IbmPlexSans = localFont({
   src: [
