@@ -31,12 +31,12 @@ const authenticator = async () => {
     throw new Error(`Authecatication is failed : $error.message`);
   }
 };
-const ImageUplaod = ({
+const ImageUpload = ({
   onFileChange,
 }: {
   onFileChange: (filePath: string) => void;
 }) => {
-  const IKuplaodRef = useRef(null);
+  const IKuploadRef = useRef(null);
   const [file, setfile] = useState<{ filePath: string | null }>({
     filePath: null,
   });
@@ -67,7 +67,7 @@ const ImageUplaod = ({
     >
       <IKUpload
         className="hidden"
-        ref={IKuplaodRef}
+        ref={IKuploadRef}
         onError={onError}
         onSuccess={onSuccess}
         fileName="test.png"
@@ -76,7 +76,7 @@ const ImageUplaod = ({
         className="upload-btn"
         onClick={(e) => {
           e.preventDefault();
-          if (IKuplaodRef.current) {
+          if (IKuploadRef.current) {
             // @ts-ignore
             IKuplaodRef.current?.click();
           }
@@ -89,7 +89,7 @@ const ImageUplaod = ({
           height={20}
           className="object-contain"
         />
-        <p className="text-light-100 text-base">Upload a File</p>
+        <p className="text-black text-base">Upload a File</p>
         {file && <p className="upload-filename">{file.filePath}</p>}
       </Button>
       {file.filePath && (
@@ -97,11 +97,11 @@ const ImageUplaod = ({
           alt={file.filePath}
           path={file.filePath}
           width={500}
-          height={500}
+          height={300}
         />
       )}
     </ImageKitProvider>
   );
 };
 
-export default ImageUplaod;
+export default ImageUpload;

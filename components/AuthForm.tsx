@@ -23,7 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constant";
-import ImageUplaod from "./ImageUplaod";
+import ImageUplaod from "./ImageUpload";
 
 interface Props<T extends FieldValues> {
   schema: ZodType<T>;
