@@ -9,8 +9,6 @@ import {
   pgEnum,
   timestamp,
 } from "drizzle-orm/pg-core";
-import { STATUS_CODES } from "http";
-import { University } from "lucide-react";
 
 export const STATUS_ENUM = pgEnum("status", ["Pending", "Approved", "Reject"]);
 export const ROLE_ENUM = pgEnum("role", ["User", "Admin"]);
@@ -19,7 +17,7 @@ export const BORROW_STATUS_ENUM = pgEnum("borrow_status", [
   "Returned",
 ]);
 
-export const todo = pgTable("users", {
+export const users = pgTable("users", {
   id: uuid("ID").notNull().primaryKey().defaultRandom().unique(),
   fullname: varchar("FullName", { length: 255 }).notNull(),
   email: varchar("Email").notNull().unique(),
@@ -29,5 +27,5 @@ export const todo = pgTable("users", {
   status: STATUS_ENUM("Status").default("Pending"),
   role: ROLE_ENUM("Role").default("User"),
   lastActivityDate: date("LastActivityDate").defaultNow(),
-  cteatedAt: timestamp("CreatedAt", { withTimezone: true }).defaultNow(),
+  CreatedAt: timestamp("CreatedAt", { withTimezone: true }).defaultNow(),
 });
