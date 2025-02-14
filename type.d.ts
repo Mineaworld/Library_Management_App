@@ -12,3 +12,11 @@ interface Book {
   videoUrl: string;
   summary: string;
 }
+
+interface AuthCredentials {
+  fullName: string;
+  email: string;
+  password: string;
+  studentId: number;
+  universityCard: string;
+}
