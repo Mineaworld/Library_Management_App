@@ -2,6 +2,7 @@
 import AuthForm from "@/components/AuthForm";
 import React from "react";
 import { SignUpSchema } from "@/lib/validation";
+import { signUp } from "@/lib/actions/auth";
 
 const page = () => {
   return (
@@ -15,7 +16,7 @@ const page = () => {
         studentId: 0,
         universityCard: "",
       }}
-      // onSubmit={SignUp}
+      onSubmit={signUp}
     />
   );
 };

@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
+import { SessionProvider } from "next-auth/react";
+import { auth } from "@/auth";
 
 const IbmPlexSans = localFont({
   src: [
@@ -45,14 +47,22 @@ export const metadata: Metadata = {
   description: "Online Library Application",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const session = await auth();
   return (
     <html lang="en">
-      <body
-        className={`${IbmPlexSans.className} ${bebasNeue.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <SessionProvider session={session}>
+        <body
+          className={`${IbmPlexSans.className} ${bebasNeue.variable} antialiased`}
+        >
+          {children}
+          <Toaster />
+        </body>
+      </SessionProvider>
     </html>
   );
 }
