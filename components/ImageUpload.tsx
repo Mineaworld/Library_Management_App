@@ -12,9 +12,10 @@ const {
   },
 } = config;
 
+// Authenticator function to get authentication tokens from the server
 const authenticator = async () => {
   try {
-    const respone = await fetch(`${config.env.apiEndpint}/api/auth/imagekit`);
+    const respone = await fetch(`${config.env.apiEndpoint}/api/auth/imagekit`);
 
     if (!respone.ok) {
       const errortext = await respone.text();
@@ -42,7 +43,7 @@ const ImageUpload = ({
   });
 
   const onError = (error: any) => {
-    console.log("error");
+    console.log("error", error);
 
     toast({
       title: "Uploaded failed !",
@@ -78,7 +79,7 @@ const ImageUpload = ({
           e.preventDefault();
           if (IKuploadRef.current) {
             // @ts-ignore
-            IKuplaodRef.current?.click();
+            IKuploadRef.current?.click();
           }
         }}
       >
