@@ -55,6 +55,7 @@ const AuthForm = <T extends FieldValues>({
         description: isSignin
           ? "Signed in successfully"
           : "Signed up successfully",
+        duration: 4500,
       });
       router.push("/");
     } else {
@@ -62,6 +63,7 @@ const AuthForm = <T extends FieldValues>({
         title: `Error ${isSignin ? "signing in" : "signing up"}`,
         description: result.error ?? "Something went wrong",
         variant: "destructive",
+        duration: 6500,
       });
     }
   };
