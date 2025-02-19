@@ -47,6 +47,11 @@ const AuthForm = <T extends FieldValues>({
     defaultValues: defaultValues as DefaultValues<T>,
   });
 
+  /**
+   * Handles the form submission.
+   * If the submission is successful, shows a success toast and redirects to the homepage.
+   * If the submission fails, shows an error toast.
+   */
   const handleSubmit: SubmitHandler<T> = async (data) => {
     const result = await onSubmit(data);
     if (result.success) {
