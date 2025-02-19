@@ -30,12 +30,13 @@ const Header = ({ session }: { session: Session }) => {
           </Link>
         </li>
         <li>
-          <Link href="/my-profile"></Link>
-          <Avatar>
-            <AvatarFallback className="bg-amber-100 text-black">
-              {Getintial(session?.user?.name || "IN")}
-            </AvatarFallback>
-          </Avatar>
+          <Link href="/my-profile">
+            <Avatar>
+              <AvatarFallback className="bg-amber-100 text-black font-bold">
+                {Getintial(session?.user?.name || "IN")}
+              </AvatarFallback>
+            </Avatar>
+          </Link>
         </li>
       </ul>
     </header>
