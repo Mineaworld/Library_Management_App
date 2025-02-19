@@ -11,20 +11,40 @@ export const SignInWithCredentials = async (
 ) => {
   const { email, password } = credentials;
 
+  let result: { error?: string };
   try {
-    const result = await signIn("credentials", {
+    result = await signIn("credentials", {
       email,
       password,
       redirect: false,
     });
-    if (result?.error) {
-      return { error: result.error, success: false };
-    }
-    return { success: true };
   } catch (error) {
     console.log(error, "Signin error");
-    return { error: "Something went wrong", success: false };
+    // If signIn throws, assign a generic error string to trigger our database check
+    result = { error: "CredentialsSigninError" };
   }
+
+  if (result?.error) {
+    // Extra check: query the database to see if a user with this email exists
+    const userExists = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email))
+      .limit(1);
+
+    if (userExists.length === 0) {
+      return {
+        error: "The email address you entered does not match any account.",
+        success: false,
+      };
+    } else {
+      return {
+        error: "The password you entered is incorrect.",
+        success: false,
+      };
+    }
+  }
+  return { success: true };
 };
 
 export const signUp = async (params: AuthCredentials) => {
