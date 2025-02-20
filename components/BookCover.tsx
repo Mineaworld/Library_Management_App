@@ -37,7 +37,7 @@ const BookCover = ({
       <BookSvg coverColor={coverColor} />
       <div
         className="absolute z-10"
-        style={{ left: "12%", width: "87%", height: "88%" }}
+        style={{ left: "12%", width: "87%", height: "8%" }}
       >
         <Image
           src={coverImage}
