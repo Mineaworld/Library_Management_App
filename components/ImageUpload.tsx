@@ -11,25 +11,23 @@ const {
     imagekit: { publicKey, urlEndpoint },
   },
 } = config;
-
 // Authenticator function to get authentication tokens from the server
 const authenticator = async () => {
   try {
-    const respone = await fetch(`${config.env.apiEndpoint}/api/auth/imagekit`);
+    const response = await fetch(`${config.env.apiEndpoint}/api/auth/imagekit`);
 
-    if (!respone.ok) {
-      const errortext = await respone.text();
-
+    if (!response.ok) {
+      const errortext = await response.text();
       throw new Error(
-        `Request failed with status ${respone.status} : ${errortext}`
+        `Request failed with status ${response.status} : ${errortext}`
       );
     }
 
-    const data = await respone.json();
+    const data = await response.json();
     const { token, expire, signature } = data;
     return { token, expire, signature };
   } catch (error: any) {
-    throw new Error(`Authecatication is failed : $error.message`);
+    throw new Error(`Authecatication is failed : ${error.message}`);
   }
 };
 const ImageUpload = ({
@@ -43,7 +41,7 @@ const ImageUpload = ({
   });
 
   const onError = (error: any) => {
-    console.log("error", error);
+    console.log("Upload error", error);
 
     toast({
       title: "Uploaded failed !",
@@ -53,13 +51,13 @@ const ImageUpload = ({
   };
   const onSuccess = (res: any) => {
     setfile(res);
+    onFileChange(res.filePath);
 
     toast({
       title: "Uploaded successfully !",
       description: `${res.filePath} uploaded successfully`,
     });
   };
-
   return (
     <ImageKitProvider
       publicKey={publicKey}
