@@ -1,0 +1,7 @@
+import { Client as WorkflowClient } from "@upstash/workflow";
+import config from "@/lib/config";
+
+export const workflowClient = new WorkflowClient({
+  //   url: config.env.upstash.workflowUrl,
+  //   token: config.env.upstash.workflowToken,
+});
